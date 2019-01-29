@@ -2,14 +2,19 @@
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
+using System;
+using System.Collections.Generic;
+
 
 namespace Android
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
+        private readonly MainViewModel _model = new MainViewModel();
+
         RecyclerView OffersListRecyclerView;
-        RecyclerView.Adapter OffersListAdapter;
+        OffersListAdapter OffersListAdapter;
         RecyclerView.LayoutManager OffersListLayoutManager;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -22,9 +27,15 @@ namespace Android
 
             OffersListLayoutManager = new LinearLayoutManager(this);
             OffersListRecyclerView.SetLayoutManager(OffersListLayoutManager);
-            
-            OffersListAdapter = new OffersListAdapter(new string[] {"first", "second", "third", "forth"});
+
+            OffersListAdapter = new OffersListAdapter(new List<Offer>());
             OffersListRecyclerView.SetAdapter(OffersListAdapter);
+
+            _model.LoadOffers().ContinueWith(obj => {
+                OffersListAdapter.Offers = _model.Offers;
+                OffersListAdapter.NotifyItemRangeInserted(0, _model.Offers.Count);
+            });
+
         }
     }
 }

@@ -1,14 +1,15 @@
 ﻿using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using System.Collections.Generic;
 
 namespace Android
 {
     public class OffersListAdapter : RecyclerView.Adapter
     {
-        private string[] testData;
+        public List<Offer> Offers;
 
-        public override int ItemCount => testData.Length;
+        public override int ItemCount => Offers.Count;
 
         public class OfferViewHolder : RecyclerView.ViewHolder
         {
@@ -19,9 +20,9 @@ namespace Android
             }
         }
 
-        public OffersListAdapter(string[] data)
+        public OffersListAdapter(List<Offer> offers)
         {
-            testData = data;
+            this.Offers = offers;
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -31,9 +32,8 @@ namespace Android
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-
             OfferViewHolder offerViewHolder = holder as OfferViewHolder;
-            offerViewHolder.IdTextView.Text = testData[position];
+            offerViewHolder.IdTextView.Text = Offers[position].Id;
         }
     }
 }
