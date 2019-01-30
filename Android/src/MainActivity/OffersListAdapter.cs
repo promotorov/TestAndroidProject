@@ -2,12 +2,14 @@
 using Android.Views;
 using Android.Widget;
 using System.Collections.Generic;
+using System;
 
 namespace Android
 {
     public class OffersListAdapter : RecyclerView.Adapter
     {
         public List<Offer> Offers;
+        Action<int> OfferItemClicked;
 
         public override int ItemCount => Offers.Count;
 
@@ -20,19 +22,22 @@ namespace Android
             }
         }
 
-        public OffersListAdapter(List<Offer> offers)
+        public OffersListAdapter(List<Offer> offers, Action<int> offerItemClicked)
         {
-            this.Offers = offers;
+            Offers = offers;
+            OfferItemClicked = offerItemClicked;
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            return new OfferViewHolder(new TextView(parent.Context)); 
+            TextView orderIdTextView = new TextView(parent.Context);
+            return new OfferViewHolder(orderIdTextView); 
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             OfferViewHolder offerViewHolder = holder as OfferViewHolder;
+            offerViewHolder.ItemView.Click += (sender, args) => OfferItemClicked(position);
             offerViewHolder.IdTextView.Text = Offers[position].Id;
         }
     }
