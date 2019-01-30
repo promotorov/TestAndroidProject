@@ -16,7 +16,7 @@ namespace Android
             SetContentView(Resource.Layout.activity_offer_info);
 
             OfferJsonTextView = (TextView)FindViewById(Resource.Id.offer_json_text_view);
-            OfferJsonTextView.Text = Intent.GetStringExtra("0");
+            OfferJsonTextView.Text = Intent.GetStringExtra(IntentDataKey.OFFER.ToString());
         }
     }
 }

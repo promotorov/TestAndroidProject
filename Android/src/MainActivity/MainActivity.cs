@@ -43,7 +43,7 @@ namespace Android
         public void OfferItemClicked(int position)
         {
             Intent intent = new Intent(this, typeof(OfferInfoActivity));
-            intent.PutExtra("0", JsonConvert.SerializeObject(_model.Offers[position]));
+            intent.PutExtra(IntentDataKey.OFFER.ToString(), JsonConvert.SerializeObject(_model.Offers[position]));
             StartActivity(intent);
         }
     }

@@ -60,6 +60,7 @@
     <Compile Include="src\MainActivity\MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Model\IntentDataKey.cs" />
     <Compile Include="src\Model\Offer.cs" />
     <Compile Include="src\OfferInfoActivity\OfferInfoActivity.cs" />
     <Compile Include="src\Service\Service.cs" />
